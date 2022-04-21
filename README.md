@@ -12,10 +12,12 @@
 
 <h2>채팅 시연</h2>
 
->1. 회원가입 & 로그인
+1. 회원가입 & 로그인
+<br>
 https://user-images.githubusercontent.com/83101729/164396166-e3eb54a8-6311-47cb-a84e-b2a818d8c096.mp4
 
 
->2. 귓속말, 멀티채팅, 서버측 로그 
+2. 귓속말, 멀티채팅, 서버측 로그 
+<br>
 https://user-images.githubusercontent.com/83101729/164396215-b51d8b5d-be32-4333-b015-02d9515fb03d.mp4
 
