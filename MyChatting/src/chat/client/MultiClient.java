@@ -60,7 +60,7 @@ public class MultiClient extends JFrame implements ActionListener {
     //============로그인 구성요소======================
 
     private JTextField id = new JTextField(10);
-    private JTextField pw = new JTextField(15);
+    private JPasswordField pw = new JPasswordField(15);
     private JButton Login =new JButton("Login");
     private JButton showJoinBtn =new JButton("Join");
     private JLabel upText = new JLabel("Welcome");
