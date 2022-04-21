@@ -24,14 +24,14 @@ import chat.vo.UserVO;
 
 public class MultiClient extends JFrame implements ActionListener {
 
-	private Socket socket; //¼­¹ö¶û ¿¬°áµÈ ¼ÒÄÏ
+	private Socket socket; //ì„œë²„ë‘ ì—°ê²°ëœ ì†Œì¼“
     private ObjectInputStream ois =null;
     private ObjectOutputStream oos =null;
 
 
     
-    //============Ã¤ÆÃÃ¢ ±¸¼º¿ä¼Ò =========================
-    //¹öÆ° ÀÌ¹ÌÁö=========================================
+    //============ì±„íŒ…ì°½ êµ¬ì„±ìš”ì†Œ =========================
+    //ë²„íŠ¼ ì´ë¯¸ì§€=========================================
     ImageIcon img = new ImageIcon("./Button_Image/1.png");
     Image img1 =img.getImage();
     Image changImg = img1.getScaledInstance(30,30,Image.SCALE_SMOOTH);
@@ -43,13 +43,13 @@ public class MultiClient extends JFrame implements ActionListener {
  //   ImageIcon changeOutIcon = new ImageIcon(changeOutImg);
     
     private JTextArea outChat;// = new JTextArea(30,50) ;
-    private JTextField inChat = new JTextField(10);//ÀÔ·ÂÇÏ´Â Ã¤ÆÃÃ¢
+    private JTextField inChat = new JTextField(10);//ì…ë ¥í•˜ëŠ” ì±„íŒ…ì°½
     
     private JButton chatBt = new JButton(changeIcon);
-    private JButton chatExit = new JButton("³ª°¡±â");
-    private JButton userModify = new JButton("È¸¿øÁ¤º¸¼öÁ¤");
-    private JButton userDelete = new JButton("È¸¿øÅ»Åğ");
-    private JButton fileSend = new JButton("ÆÄÀÏÀü¼Û");
+    private JButton chatExit = new JButton("ë‚˜ê°€ê¸°");
+    private JButton userModify = new JButton("íšŒì›ì •ë³´ìˆ˜ì •");
+    private JButton userDelete = new JButton("íšŒì›íƒˆí‡´");
+    private JButton fileSend = new JButton("íŒŒì¼ì „ì†¡");
   
     private Label myInfo = new Label();
     private Label userList = new Label("Member List");
@@ -57,7 +57,7 @@ public class MultiClient extends JFrame implements ActionListener {
   //  private java.util.List<UserVO> userData = new ArrayList<UserVO>();
     
 
-    //============·Î±×ÀÎ ±¸¼º¿ä¼Ò======================
+    //============ë¡œê·¸ì¸ êµ¬ì„±ìš”ì†Œ======================
 
     private JTextField id = new JTextField(10);
     private JTextField pw = new JTextField(15);
@@ -66,23 +66,23 @@ public class MultiClient extends JFrame implements ActionListener {
     private JLabel upText = new JLabel("Welcome");
     private JLabel upText1 = new JLabel("Simple Is Best Chat~");
 
-    //===========È¸¿ø°¡ÀÔ È­¸é±¸¼º¿¡ ÇÊ¿äÇÑ ±¸¼º¿ä¼Ò =============
+    //===========íšŒì›ê°€ì… í™”ë©´êµ¬ì„±ì— í•„ìš”í•œ êµ¬ì„±ìš”ì†Œ =============
 
     JTextField joinId = new JTextField(10);
-    JTextField joinPw = new JTextField(15);
+    JPasswordField joinPw = new JPasswordField(15);
     JTextField checkPw = new JTextField(15);
     JTextField joinName = new JTextField(15);
-    JLabel joinTitle = new JLabel("È¸¿ø°¡ÀÔ");
-    JButton joinCheck = new JButton("Áßº¹È®ÀÎ");
-    JButton JoinBtn = new JButton("È¸¿ø°¡ÀÔ");
+    JLabel joinTitle = new JLabel("íšŒì›ê°€ì…");
+    JButton joinCheck = new JButton("ì¤‘ë³µí™•ì¸");
+    JButton JoinBtn = new JButton("íšŒì›ê°€ì…");
 
-  //===========È¸¿øÁ¤º¸¼öÁ¤ ±¸¼º¿ä¼Ò======================
+  //===========íšŒì›ì •ë³´ìˆ˜ì • êµ¬ì„±ìš”ì†Œ======================
     private JTextField modifyId = new JTextField(10);
     private JTextField modifyPw = new JTextField(15);
     private JTextField modifycheckPw = new JTextField(15);
     private JTextField modifyName = new JTextField(15);
-    private JButton userModifyFinish = new JButton("¼öÁ¤¿Ï·á");
-    private Label ModiTitle = new Label("È¸¿øÁ¤º¸ ¼öÁ¤");
+    private JButton userModifyFinish = new JButton("ìˆ˜ì •ì™„ë£Œ");
+    private Label ModiTitle = new Label("íšŒì›ì •ë³´ ìˆ˜ì •");
     //=============================================
 
     private JFrame jFrame,loginTool,userJoin,userModi;
@@ -96,17 +96,17 @@ public class MultiClient extends JFrame implements ActionListener {
 
     public MultiClient() {
         super();
-        settingClientGUI();//È­¸éÀ» ±¸¼ºÇÏ°í
-        setEvent();//ÀÌº¥Æ®¸¦ ¼³Á¤ÇÏ°í
+        settingClientGUI();//í™”ë©´ì„ êµ¬ì„±í•˜ê³ 
+        setEvent();//ì´ë²¤íŠ¸ë¥¼ ì„¤ì •í•˜ê³ 
         this.pack();
 
     }
 
     public void init() throws IOException {
         socket = new Socket("127.0.1.1",5050);
-        System.out.println("¼­¹ö¿Í ¿¬°á ¼º°ø!!!");
+        System.out.println("ì„œë²„ì™€ ì—°ê²° ì„±ê³µ!!!");
 
-     //====ÆÄÀÏÀü¼Û??=============
+     //====íŒŒì¼ì „ì†¡??=============
   
         oos= new ObjectOutputStream(socket.getOutputStream());
         ois =new ObjectInputStream(socket.getInputStream());
@@ -117,15 +117,15 @@ public class MultiClient extends JFrame implements ActionListener {
 
     public void settingClientGUI() {
         jFrame = new JFrame("Simple Is Best Chat ~");
-        jFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);//X´­·¶À»¶§ ÇÁ·Î±×·½ Á¾·á Ãß°¡
+        jFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);//XëˆŒë €ì„ë•Œ í”„ë¡œê·¸ë ˜ ì¢…ë£Œ ì¶”ê°€
         loginTool= new JFrame("login~");
-        loginTool.setDefaultCloseOperation(EXIT_ON_CLOSE);//X´­·¶À»¶§ ÇÁ·Î±×·½ Á¾·á Ãß°¡
+        loginTool.setDefaultCloseOperation(EXIT_ON_CLOSE);//XëˆŒë €ì„ë•Œ í”„ë¡œê·¸ë ˜ ì¢…ë£Œ ì¶”ê°€
         userJoin = new JFrame("join~");
-        userJoin.setDefaultCloseOperation(EXIT_ON_CLOSE);//X´­·¶À»¶§ ÇÁ·Î±×·½ Á¾·á Ãß°¡
+        userJoin.setDefaultCloseOperation(EXIT_ON_CLOSE);//XëˆŒë €ì„ë•Œ í”„ë¡œê·¸ë ˜ ì¢…ë£Œ ì¶”ê°€
         userModi = new JFrame("userModify~");
         userModi.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        //=========================Ã¤ÆÃÃ¢ ÇÁ·¹ÀÓ =======================================
+        //=========================ì±„íŒ…ì°½ í”„ë ˆì„ =======================================
        outChat = new JTextArea(30,50) {
     	   {
     		   
@@ -152,9 +152,9 @@ public class MultiClient extends JFrame implements ActionListener {
         Panel iPanel = new Panel(new BorderLayout(3,3));
 	        iPanel.add("Center",inChat);
 	        iPanel.add("East",chatBt);
-	        chatBt.setBorderPainted(false); //¹öÆ° ¿Ü°û¼± ¾ø¾Ö±â
-	        chatBt.setContentAreaFilled(false); //¹öÆ° ¿µ¿ª ¹è°æ»ö Á¦°Å
-	        chatBt.setFocusPainted(false);//¹öÆ° ¼±ÅÃ½Ã Å×µÎ¸® »ç¿ë¾ÈÇÔ 
+	        chatBt.setBorderPainted(false); //ë²„íŠ¼ ì™¸ê³½ì„  ì—†ì• ê¸°
+	        chatBt.setContentAreaFilled(false); //ë²„íŠ¼ ì˜ì—­ ë°°ê²½ìƒ‰ ì œê±°
+	        chatBt.setFocusPainted(false);//ë²„íŠ¼ ì„ íƒì‹œ í…Œë‘ë¦¬ ì‚¬ìš©ì•ˆí•¨ 
         Panel BPanel = new Panel(new FlowLayout());
         	BPanel.add(fileSend);
         	BPanel.add(userModify);
@@ -165,14 +165,14 @@ public class MultiClient extends JFrame implements ActionListener {
         leftPanel.add("South",iPanel);
         
         
-        outChat.setEditable(false);//Ã¤ÆÃÃ¢ ÀÔ·Â ¸·±â
+        outChat.setEditable(false);//ì±„íŒ…ì°½ ì…ë ¥ ë§‰ê¸°
         
 
         Panel rightPanel = new Panel(new BorderLayout(2,2));
         Panel childRightPanel = new Panel(new BorderLayout(2,2));
-        rightPanel.add("North",childRightPanel);//Ãß°¡
-        childRightPanel.add("South", userList);//Ãß°¡
-        childRightPanel.add("North", myInfo);//Ãß°¡
+        rightPanel.add("North",childRightPanel);//ì¶”ê°€
+        childRightPanel.add("South", userList);//ì¶”ê°€
+        childRightPanel.add("North", myInfo);//ì¶”ê°€
 
         rightPanel.add("Center",joinUserList);
         rightPanel.add("South",chatExit);
@@ -187,12 +187,12 @@ public class MultiClient extends JFrame implements ActionListener {
         jFrame.setResizable(false);
         jFrame.setVisible(false);
 
-        File f = new File("./down");//ÇöÀç°æ·Î°¡ ÀÌÅ¬¸³½º ÇÁ·ÎÁ§Æ® Æú´õ¸í!!!
+        File f = new File("./down");//í˜„ì¬ê²½ë¡œê°€ ì´í´ë¦½ìŠ¤ í”„ë¡œì íŠ¸ í´ë”ëª…!!!
         if(!f.exists()) {
-        	System.out.println("ÆÄÀÏ »ı¼º : "+ f.mkdir());
+        	System.out.println("íŒŒì¼ ìƒì„± : "+ f.mkdir());
         	
         }
-        //========================·Î±×ÀÎÃ¢ ÇÁ·¹ÀÓ =========================================
+        //========================ë¡œê·¸ì¸ì°½ í”„ë ˆì„ =========================================
 
         loginTool.setLayout(new BorderLayout(50,50));
         loginTool.add("North", new Label());
@@ -238,7 +238,7 @@ public class MultiClient extends JFrame implements ActionListener {
         loginTool.setResizable(false);
         loginTool.setVisible(true);
 
-        //================È¸¿ø°¡ÀÔ Ã¢===========================================
+        //================íšŒì›ê°€ì… ì°½===========================================
 
         userJoin.setLayout(new BorderLayout(20,20));
         userJoin.add("North",new Label());
@@ -287,7 +287,7 @@ public class MultiClient extends JFrame implements ActionListener {
 
 
     
-    //======È¸¿øÁ¤º¸ ¼öÁ¤==========================================
+    //======íšŒì›ì •ë³´ ìˆ˜ì •==========================================
     
     userModi.setLayout(new BorderLayout(20,20));
     userModi.add("North",new Label());
@@ -313,7 +313,7 @@ public class MultiClient extends JFrame implements ActionListener {
     ccPanel3.add(modifycheckPw);
     ccPanel3.add(modifyName);
     
-    modifyId.setEditable(false);  //¼öÁ¤Ã¢¿¡ ÀÖ´Â ¾ÆÀÌµğÇÊµå ÀÛ¼º ¸·±â !
+    modifyId.setEditable(false);  //ìˆ˜ì •ì°½ì— ìˆëŠ” ì•„ì´ë””í•„ë“œ ì‘ì„± ë§‰ê¸° !
     
     
     centPanel3.add("Center",ccPanel3);
@@ -371,19 +371,19 @@ public class MultiClient extends JFrame implements ActionListener {
 			userExit();//
 			System.exit(0);
 		}
-		if(e.getSource() == joinCheck) { //¾ÆÀÌµğ Áßº¹È®ÀÎ
+		if(e.getSource() == joinCheck) { //ì•„ì´ë”” ì¤‘ë³µí™•ì¸
 			joinCheck();
 		}
 		if(e.getSource() == chatBt || e.getSource() == inChat) {
 			sendChat();
 		}if(e.getSource() == joinUserList) {
-			whisper();//Á¢¼ÓÀÚ¸ñ·Ï ´­·¶À»¶§ ±×³ğÀÇ ±Ó¼Ó¸» ...
+			whisper();//ì ‘ì†ìëª©ë¡ ëˆŒë €ì„ë•Œ ê·¸ë†ˆì˜ ê·“ì†ë§ ...
 		}
-		if(e.getSource()== userModify) {  //È¸¿øÁ¤º¸ ¼öÁ¤´­·¶À»¶§
+		if(e.getSource()== userModify) {  //íšŒì›ì •ë³´ ìˆ˜ì •ëˆŒë €ì„ë•Œ
 			userModify();  
-		}if(e.getSource()== userDelete) { //È¸¿øÁ¤º¸ »èÁ¦ÇÒ¶§ 
+		}if(e.getSource()== userDelete) { //íšŒì›ì •ë³´ ì‚­ì œí• ë•Œ 
 			userDelete();
-		}if(e.getSource()== userModifyFinish) {//È¸¿øÁ¤º¸¼öÁ¤ÈÄ ¼öÁ¤¿Ï·á¹öÆ° ´­·¶À»‹š 
+		}if(e.getSource()== userModifyFinish) {//íšŒì›ì •ë³´ìˆ˜ì •í›„ ìˆ˜ì •ì™„ë£Œë²„íŠ¼ ëˆŒë €ì„Â‹Âš 
 			userModifyFinsh();
 		}
 		if(e.getSource() == fileSend) {
@@ -396,20 +396,20 @@ public class MultiClient extends JFrame implements ActionListener {
 	}
 		
 	}
-//ÆÄÀÏ Àü¼Û¿ë	
+//íŒŒì¼ ì „ì†¡ìš©	
 
 
 
 
 	private void fileSendTo() throws IOException {
 		FileVO file = new FileVO();
-		fc.setDialogTitle("Àü¼ÛÇÒ ÆÄÀÏÀ» ¼±ÅÃÇÏ¼¼¿ä!!!");
+		fc.setDialogTitle("ì „ì†¡í•  íŒŒì¼ì„ ì„ íƒí•˜ì„¸ìš”!!!");
 		fc.showOpenDialog(this);
 		if(fc.getSelectedFile() == null || fc.getSelectedFile().getName().length() == 0) {
-			JOptionPane.showMessageDialog(null, "Àü¼ÛÇÒ ÆÄÀÏÀ» ¼±ÅÃÇÏ¼¼¿ä","File Send Choose",JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "ì „ì†¡í•  íŒŒì¼ì„ ì„ íƒí•˜ì„¸ìš”","File Send Choose",JOptionPane.WARNING_MESSAGE);
 			return;
 		}
-		//JOptionPane.showInternalMessageDialog(null,"ÆÄÀÏÀü¼ÛÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù." ,"File Send Success",JOptionPane.OK_OPTION); // ¤»¤».. Èñ¸Á»çÇ×¤»¤»¤»
+		//JOptionPane.showInternalMessageDialog(null,"íŒŒì¼ì „ì†¡ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤." ,"File Send Success",JOptionPane.OK_OPTION); // ã…‹ã…‹.. í¬ë§ì‚¬í•­ã…‹ã…‹ã…‹
 		
 		
 		
@@ -421,18 +421,18 @@ public class MultiClient extends JFrame implements ActionListener {
 	private void userDelete() throws IOException {
 		jFrame.setVisible(false);
 		loginTool.setVisible(true);
-		oos.writeObject(new Protocol(Action.DELETE,userId));//?ÇÏ´ÂµÕ
+		oos.writeObject(new Protocol(Action.DELETE,userId));//?í•˜ëŠ”ë‘¥
 		
 	}
 
-	private void userModifyFinsh() throws IOException { //È¸¿øÁ¤º¸ ¼öÁ¤¹öÆ°´­·¶À»¶§ 
+	private void userModifyFinsh() throws IOException { //íšŒì›ì •ë³´ ìˆ˜ì •ë²„íŠ¼ëˆŒë €ì„ë•Œ 
 		userModi.setVisible(false);
 		jFrame.setVisible(true);
 		oos.writeObject(new Protocol(Action.MODIFY,makeUserModi()));
 		
 	}
 
-	private void userModify() throws IOException  {// È¸¿øÁ¤º¸¼öÁ¤´­·¶À»¶§ 
+	private void userModify() throws IOException  {// íšŒì›ì •ë³´ìˆ˜ì •ëˆŒë €ì„ë•Œ 
 		userModi.setVisible(true);
 		
 		jFrame.setVisible(false);
@@ -462,12 +462,12 @@ public class MultiClient extends JFrame implements ActionListener {
 		
 	}
 
-	//¸Ş¼¼Áö Àü¼Û!!=======================================================
+	//ë©”ì„¸ì§€ ì „ì†¡!!=======================================================
 	private void sendChat() throws IOException {
 		ChatVO chatVo = new ChatVO();
 		chatVo.setWriterId(userId);
 		chatVo.setMessage(inChat.getText());
-		String[] list = inChat.getText().split(" "); //"# 1 #¿¡°Ô ±Ó¼Ó¸» zz => #,1,#¿¡°Ô,±Ó¼Ó¸»,zz
+		String[] list = inChat.getText().split(" "); //"# 1 #ì—ê²Œ ê·“ì†ë§ zz => #,1,#ì—ê²Œ,ê·“ì†ë§,zz
 		
 		if(list[0].startsWith("#") && list.length >0) {
 			String whisperId = list[1];
@@ -478,7 +478,7 @@ public class MultiClient extends JFrame implements ActionListener {
 				String[] split = inChat.getText().split(":");
 				chatVo.setMessage(split[1]);
 				
-			}else if(whisperId.equals(userId)){ // Áö¸ñÇÑ°Ô ³ª ÀÚ½ÅÀÌ¶ó¸é
+			}else if(whisperId.equals(userId)){ // ì§€ëª©í•œê²Œ ë‚˜ ìì‹ ì´ë¼ë©´
 				chatVo.setWhisperId(userId);
 				String[] split = inChat.getText().split(":");
 				chatVo.setMessage(split[1]);
@@ -490,10 +490,10 @@ public class MultiClient extends JFrame implements ActionListener {
 		inChat.setText("");
 		
 	}
-	//±Ó¼Ó¸»============================================================
+	//ê·“ì†ë§============================================================
 	private void whisper() throws IOException {
 		String id = joinUserList.getSelectedItem();
-		inChat.setText("# "+id+" #¿¡°Ô ±Ó¼Ó¸»:");
+		inChat.setText("# "+id+" #ì—ê²Œ ê·“ì†ë§:");
 		
 		
 	
@@ -506,17 +506,17 @@ public class MultiClient extends JFrame implements ActionListener {
 	
 	
 	
-	//¾ÆÀÌµğ Áßº¹ Ã¼Å©=======================================================
+	//ì•„ì´ë”” ì¤‘ë³µ ì²´í¬=======================================================
 	private void joinCheck() throws IOException {
 		oos.writeObject(new Protocol(Action.ID_CHECK,joinId.getText()));
 	}
 	
 	
-	//È¸¿ø°¡ÀÔ===============================================================
+	//íšŒì›ê°€ì…===============================================================
 	private void join() throws IOException {
 		if(joinId.getText().length() !=0 && joinPw.getText().length() != 0 && checkPw.getText().length()!= 0 && joinName.getText().length()!= 0 ) {
 			if(!joinPw.getText().equals(checkPw.getText()) ) {
-				JOptionPane.showMessageDialog(null,"ºñ¹Ğ¹øÈ£ ºÒÀÏÄ¡!!!","join_null",JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null,"ë¹„ë°€ë²ˆí˜¸ ë¶ˆì¼ì¹˜!!!","join_null",JOptionPane.WARNING_MESSAGE);
 				return;
 			}
 			oos.writeObject(new Protocol(Action.JOIN, makeJoinVo()));
@@ -524,7 +524,7 @@ public class MultiClient extends JFrame implements ActionListener {
 			return;
 		}
 		else if(joinId.getText().length() ==0 || joinPw.getText().length() ==0|| checkPw.getText().length()==0||joinName.getText().length() ==0) {
-			JOptionPane.showMessageDialog(null,"ºóÄ­¾øÀÌ ÀÛ¼ºÇØ ÁÖ¼¼¿ä","join_null",JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null,"ë¹ˆì¹¸ì—†ì´ ì‘ì„±í•´ ì£¼ì„¸ìš”","join_null",JOptionPane.WARNING_MESSAGE);
 			return;
 		}
 		
@@ -541,19 +541,19 @@ public class MultiClient extends JFrame implements ActionListener {
 		return joinVo;
 		
 	}
-	//È¸¿ø°¡ÀÔ ¼º°ø½Ã!!
+	//íšŒì›ê°€ì… ì„±ê³µì‹œ!!
 	public void successJoin() {
-		JOptionPane.showMessageDialog(null, "È¸¿ø°¡ÀÔ ¼º°ø!!","Join_Success",JOptionPane.OK_OPTION);
+		JOptionPane.showMessageDialog(null, "íšŒì›ê°€ì… ì„±ê³µ!!","Join_Success",JOptionPane.OK_OPTION);
 		userJoin.setVisible(false);
 		loginTool.setVisible(true);
 	}
-	//·Î±×ÀÎ ================================================================
+	//ë¡œê·¸ì¸ ================================================================
 	
 	private void login() throws IOException {
 		oos.writeObject(new Protocol(Action.LOGIN,makeLoginVo()));
 	}
 	
-	//·Î±×ÀÎÀ¯Àú Á¤º¸ ¸ğÀ¸±â
+	//ë¡œê·¸ì¸ìœ ì € ì •ë³´ ëª¨ìœ¼ê¸°
 	private LoginVO makeLoginVo() {
 		LoginVO loginVo = new LoginVO();
 		loginVo.setUserId(id.getText());
@@ -561,7 +561,7 @@ public class MultiClient extends JFrame implements ActionListener {
 		
 		return loginVo;
 	}
-	//·Î±×ÀÎ ¼º°ø½Ã
+	//ë¡œê·¸ì¸ ì„±ê³µì‹œ
 	public void successLogin() {
 		userId = id.getText();
 		jFrame.setVisible(true);
@@ -570,9 +570,9 @@ public class MultiClient extends JFrame implements ActionListener {
 	}
 	
 		
-	public void setJoinUserList(List<String> idList) {//Á¢¼Ó¶§¸¶´Ù ¸®½ºÆ® ¾÷µ¥ÀÌÆ®
+	public void setJoinUserList(List<String> idList) {//ì ‘ì†ë•Œë§ˆë‹¤ ë¦¬ìŠ¤íŠ¸ ì—…ë°ì´íŠ¸
 		
-		joinUserList.removeAll(); //ÇöÀç¸®½ºÆ® ¸ù¶¥ ºñ¿ì°í!
+		joinUserList.removeAll(); //í˜„ì¬ë¦¬ìŠ¤íŠ¸ ëª½ë•… ë¹„ìš°ê³ !
 		
 		for(String test_id : idList)
 		{
@@ -590,7 +590,7 @@ public class MultiClient extends JFrame implements ActionListener {
 		if(joinUserList.getItemCount() > 0){
 			joinUserList.removeAll();
 		}
-//		joinUserList.removeAll();//ÇöÀç¸®½ºÆ® ¸ù¶¥ ºñ¿ì°í!
+//		joinUserList.removeAll();//í˜„ì¬ë¦¬ìŠ¤íŠ¸ ëª½ë•… ë¹„ìš°ê³ !
 		//idList.forEach(id -> joinUserList.add(id));
 		for(String id : idList){
 		   joinUserList.add(id);
@@ -634,20 +634,20 @@ public class MultiClient extends JFrame implements ActionListener {
 	}
 	
 	public void idCheckSuccess() {
-		JOptionPane.showMessageDialog(null,"¾ÆÀÌµğ »ç¿ë°¡´É","Id_OK",JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null,"ì•„ì´ë”” ì‚¬ìš©ê°€ëŠ¥","Id_OK",JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public void idCheckFail() {
-		JOptionPane.showMessageDialog(null,"ÀÌ¹Ì »ç¿ëÁßÀÎ ¾ÆÀÌµğ ÀÔ´Ï´Ù.","Id_Fail",JOptionPane.WARNING_MESSAGE);
+		JOptionPane.showMessageDialog(null,"ì´ë¯¸ ì‚¬ìš©ì¤‘ì¸ ì•„ì´ë”” ì…ë‹ˆë‹¤.","Id_Fail",JOptionPane.WARNING_MESSAGE);
 	}
 
 	public void idCheckFailZero() {
-		JOptionPane.showMessageDialog(null,"¾ÆÀÌµğ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä!!!","Id_Fail!",JOptionPane.WARNING_MESSAGE);
+		JOptionPane.showMessageDialog(null,"ì•„ì´ë””ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”!!!","Id_Fail!",JOptionPane.WARNING_MESSAGE);
 		
 	}
 
 	public void joinFail() {
-		JOptionPane.showMessageDialog(null,"ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö¾Ê½À´Ï´Ù.","password_Fail",JOptionPane.WARNING_MESSAGE);
+		JOptionPane.showMessageDialog(null,"ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ì•ŠìŠµë‹ˆë‹¤.","password_Fail",JOptionPane.WARNING_MESSAGE);
 		
 	}
 
