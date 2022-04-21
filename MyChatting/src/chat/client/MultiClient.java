@@ -70,7 +70,7 @@ public class MultiClient extends JFrame implements ActionListener {
 
     JTextField joinId = new JTextField(10);
     JPasswordField joinPw = new JPasswordField(15);
-    JTextField checkPw = new JTextField(15);
+    JPasswordField checkPw = new JPasswordField(15);
     JTextField joinName = new JTextField(15);
     JLabel joinTitle = new JLabel("회원가입");
     JButton joinCheck = new JButton("중복확인");
