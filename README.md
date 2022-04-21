@@ -11,4 +11,9 @@
 ------------
 
 <h2>채팅 시연</h2>
+
+>1. 회원가입 & 로그인
 https://user-images.githubusercontent.com/83101729/164395258-76622ddb-df2b-46ae-9c83-e51a6e1423d3.mp4
+
+>2. 귓속말, 멀티채팅, 서버측 로그 
+https://user-images.githubusercontent.com/83101729/164395357-676fd005-b692-4cb6-9cf1-8bccaeefd44b.mp4
