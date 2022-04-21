@@ -82,7 +82,7 @@ public class MultiClient extends JFrame implements ActionListener {
     private JTextField modifycheckPw = new JTextField(15);
     private JTextField modifyName = new JTextField(15);
     private JButton userModifyFinish = new JButton("수정완료");
-    private Label ModiTitle = new Label("회원정보 수정");
+    private Label ModiTitle = new Label("update user");
     //=============================================
 
     private JFrame jFrame,loginTool,userJoin,userModi;
