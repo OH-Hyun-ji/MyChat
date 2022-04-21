@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Protocol  implements Serializable{
 	private Action action; 
-	private Object object; // action »ç¿ë½Ã °´Ã¼´ã´Â ±×¸©
+	private Object object;
 
 	public Protocol(Action action ,Object object) {
 		this.action = action;
